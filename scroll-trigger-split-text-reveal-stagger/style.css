@@ -48,7 +48,7 @@ section {
   justify-content: center;
   align-items: center;
   will-change: transform;
-  /* background-color: blue; */
+  background-color: blue;
 }
 .title:nth-child(1),
 .title:nth-child(3) {

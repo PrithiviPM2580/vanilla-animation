@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.2.3/dist/lenis.css">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: fantasy;
+            background-color: #fff;
+            color: #000;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .intro,
+        .outro {
+            height: 100vh;
+            width: 100%;
+            background-color: #50e6d4;
+        }
+
+        .title {
+            height: 100svh;
+            display: flex;
+            align-items: center;
+            background-color: rgb(0, 255, 17);
+        }
+
+        h1 {
+            font-size: 5rem;
+        }
+
+        .title-container {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            will-change: transform;
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="intro"></section>
+    <section class="main">
+        <div class="title">
+            <div class="title-container">
+                <h1>Neon Dreams</h1>
+            </div>
+        </div>
+    </section>
+    <section class="outro"></section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.2.3/dist/lenis.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.registerPlugin(ScrollTrigger, SplitText);
+
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                smoothWheel: true,
+                smoothTouch: false,
+            });
+
+            lenis.on('scroll', ScrollTrigger.update);
+            gsap.ticker.add((time) => {
+                lenis.raf(time * 1000)
+            });
+            gsap.ticker.lagSmoothing(0);
+
+            // split "Neon Dreams" into characters
+            const split = SplitText.create(".title-container h1", { type: "chars" });
+            const chars = split.chars;
+
+            // set all characters offscreen (alternate up/down)
+            chars.forEach((char, i) => {
+                const yStart = i % 2 === 0 ? -150 : 150;
+                gsap.set(char, { y: yStart, opacity: 0 });
+            });
+
+            // create scroll animation
+            ScrollTrigger.create({
+                trigger: ".main",
+                start: "top 50%",
+                end: "50% top",
+                scrub: true,
+                markers: true,
+                onUpdate: (self) => {
+                    chars.forEach((char, i) => {
+                        const delay = i * 0.05; // stagger per letter
+                        let progress = 0;
+
+                        if (self.progress >= delay) {
+                            progress = Math.min(1, (self.progress - delay) / 0.3);
+                        }
+
+                        // interpolate from offscreen → in place
+                        const yStart = i % 2 === 0 ? -150 : 150;
+                        const y = yStart - progress * yStart;
+
+                        gsap.set(char, { y, opacity: progress });
+                    });
+                },
+            });
+        });
+    </script>
+</body>
+
+</html>
