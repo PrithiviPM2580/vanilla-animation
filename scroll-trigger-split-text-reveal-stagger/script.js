@@ -41,34 +41,38 @@ document.addEventListener("DOMContentLoaded", () => {
       scrub: true,
       markers: true,
       onUpdate: (self) => {
+        console.log(self.progress);
+
         const titltContainerX =
           titleContainerInitialX - self.progress * titleContainerInitialX;
         gsap.set(titleContainer, { x: `${titltContainerX}%` });
 
-        split.chars.forEach((char,i)=>{
-            let charStaggerIndex;
-            if(index===1){
-                charStaggerIndex = charCount - i - 1;
-            }else{
-                charStaggerIndex = i;
-            }
+        split.chars.forEach((char, i) => {
+          let charStaggerIndex;
+          if (index === 1) {
+            charStaggerIndex = charCount - i - 1;
+          } else {
+            charStaggerIndex = i;
+          }
 
-            const charStartDelay= 0.1;
-            const charTimelineSpan= 1 - charStartDelay;
-            const staggerFactor= Math.min(0.75, charStaggerIndex * 0.75);
-            const delay= charStartDelay + (charStaggerIndex/charCount) * staggerFactor;
-            const duration= charTimelineSpan - (staggerFactor * (charCount -1))/charCount;
-            const start= delay;
+          const charStartDelay = 0.1;
+          const charTimelineSpan = 1 - charStartDelay;
+          const staggerFactor = Math.min(0.75, charStaggerIndex * 0.75);
+          const delay =
+            charStartDelay + (charStaggerIndex / charCount) * staggerFactor;
+          const duration =
+            charTimelineSpan - (staggerFactor * (charCount - 1)) / charCount;
+          const start = delay;
 
-            let charProgess=0;
-            if(self.progress >= start){
-                charProgess = Math.min(1, (self.progress - start)/duration);
-            }
+          let charProgess = 0;
+          if (self.progress >= start) {
+            charProgess = Math.min(1, (self.progress - start) / duration);
+          }
 
-            const charInitialY= i % 2 === 0 ? -150 : 150;
-            const charY= charInitialY - charProgess * charInitialY;
-            gsap.set(char, {y: charY});
-        })
+          const charInitialY = i % 2 === 0 ? -150 : 150;
+          const charY = charInitialY - charProgess * charInitialY;
+          gsap.set(char, { y: charY });
+        });
       },
     });
   });
