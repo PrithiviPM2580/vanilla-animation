@@ -3,3 +3,65 @@
   --sec-1-bg: #00a7e1;
   --sec-2-bg: #00171f;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: fantasy;
+  background-color: var(--bg-color);
+  color: #000;
+}
+
+h1 {
+  font-size: clamp(3rem, 10vw, 8rem);
+  line-height: 1;
+  font-weight: 100;
+  letter-spacing: -0.005em;
+}
+
+section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.intro,
+.outro {
+  height: 100svh;
+  text-align: center;
+  align-content: center;
+}
+
+.title {
+  height: 85svh;
+  display: flex;
+  align-items: center;
+  background-color: red;
+}
+.title-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  will-change: transform;
+  /* background-color: blue; */
+}
+.title:nth-child(1),
+.title:nth-child(3) {
+  background-color: var(--sec-1-bg);
+  color: #fff;
+}
+.title:nth-child(2) {
+  background-color: var(--sec-2-bg);
+  color: #fff;
+}
+
+.char {
+  position: relative;
+  display: inline-block;
+  will-change: transform;
+}
