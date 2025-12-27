@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      id="box"
+      style="
+        width: 200px;
+        height: 100px;
+        background: lightblue;
+        margin: 50px;
+        position: relative;
+      "
+    >
+      Move your mouse here
+    </div>
+
+    <script>
+      const box = document.getElementById("box");
+
+      box.addEventListener("mousemove", (e) => {
+        console.log("offsetX:", e.offsetX, "offsetY:", e.offsetY);
+      });
+
+      box.addEventListener("mousemove", (e) => {
+        const boxRect = box.getBoundingClientRect();
+        const boxOffsetX = e.clientX - boxRect.left;
+        const boxOffsetY = e.clientY - boxRect.top;
+        console.log(
+          "Calculated offsetX:",
+          boxOffsetX,
+          "Calculated offsetY:",
+          boxOffsetY
+        );
+      });
+    </script>
+  </body>
+</html>
