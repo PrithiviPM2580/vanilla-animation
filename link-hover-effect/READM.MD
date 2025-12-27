@@ -1,17 +1,73 @@
-# How to make link hover effect
+# Link Hover Effect
 
-- Create a main wrapper div 
-- Create an anchor tag inside the wrapper div and for the text use span tag
-- Create a cursor div inside the wrapper div
-- Style it with CSS make the wrapper center and for each anchor tag make a transition effect
-- For the text span also make a transition effect with pointer events none
-- For the cursor make fixed position with the transform transition effect
-- When hovering the anchor tag the cursor will transform and scale up
-- Make it repsonesive for smaller screens
-- In javascript select the cursoe and the anchor tags
-- 
+## Use four block only:
 
-# Its logic
+1. Structural(HTML)
+2. Styling(CSS)
+3. Inputs(Events)
+4. Motion Logic(JS)
 
-- When we hover the text the cursor will scale up and follow the mouse pointer
-- When we remove the mouse pointer from the text the cursor will scale down to its original size
+
+### Structure(What exists)
+```yml
+Wrapper
+- Link (a)
+  - Span (text)
+- Cursor (div)
+```
+
+### Styling(How it looks)
+```text
+Wrapper
+- center aligned
+
+Link
+- transition (color/transform)
+
+Text (span)
+- pointer-event: none
+- transition
+
+Cursor
+- fixed position
+- transition: transform
+- default scale:1
+```
+### Inputs (What user does)
+```text
+Mouse move
+Mouse enter (link)
+Mouse leave (link)
+```
+
+### Motion Logic (What happens)
+```text
+State:
+cursorX
+cursorY
+cursorScale
+
+Rules:
+Rule 1: Cursor follows mouse (with easing)
+Rule 2: On link hover -> cursoeScale =8
+Rule 3: On leave -> cursoeScale =1
+```
+
+### Translate Logic
+```js
+//Follow Motion
+
+x+= (mouseX -x) * 0.1
+y+= (mouseY -y) * 0.1
+
+//Hover Sate
+mouseenter -> scale=8
+mouseleave -> scale=1
+
+//Apply transform
+transform: translate(x,y) scale(scale)
+```
+
+
+
+

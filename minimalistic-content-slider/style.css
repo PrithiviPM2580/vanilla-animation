@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100svh;
+  width: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  overflow: hidden;
+  background-color: #222;
+}
+
+.control__buttons {
+  position: fixed;
+  top: 80%;
+  display: flex;
+  gap: 3em;
+  left: 5%;
+}
+
+.control__buttons .prev,
+.control__buttons .next {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 0.5px solid #ffffff;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.control__buttons .prev button,
+.control__buttons .next button {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+}
+
+.prev:hover {
+  border: 0.5px solid black;
+}
+.next:hover {
+  border: 0.5px solid black;
+}
+.prev:hover button {
+  color: black;
+}
+.next:hover button {
+  color: black;
+}
+
+.slide-texts {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.slide-texts__text {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.slide-texts__text .text {
+  height: 100svh;
+  width: 100%;
+  flex: 1;
+}
+
+.slide-texts__text .text h1 {
+  font-size: 5rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: white;
+}
