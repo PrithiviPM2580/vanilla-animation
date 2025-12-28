@@ -2,108 +2,134 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BEM Slider</title>
+    <title>Infinite Slider</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
-        font-family: sans-serif;
-        display: flex;
-        justify-content: center;
-        margin-top: 50px;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
       }
 
       .slider {
-        width: 400px;
-        border: 2px solid #ccc;
-        padding: 20px;
-        text-align: center;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
         position: relative;
       }
 
-      /* Slides */
-      .slider__text {
-        display: none;
-        font-size: 24px;
-        transition: opacity 0.5s ease;
-      }
-
-      .slider__text--active {
-        display: block;
-      }
-
-      /* Controls */
-      .slider__controls {
-        margin-top: 20px;
+      .slides {
         display: flex;
-        justify-content: center;
-        gap: 20px;
+        height: 100%;
+        transition: transform 0.6s ease-in-out;
       }
 
-      .slider__control button {
-        padding: 10px 20px;
+      .slide {
+        min-width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        color: white;
+      }
+
+      .slide1 {
+        background: #ff7675;
+      }
+      .slide2 {
+        background: #74b9ff;
+      }
+      .slide3 {
+        background: #55efc4;
+      }
+
+      button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 12px 20px;
+        font-size: 18px;
         cursor: pointer;
+        z-index: 10;
+      }
+
+      #prev {
+        left: 20px;
+      }
+      #next {
+        right: 20px;
       }
     </style>
   </head>
   <body>
     <div class="slider">
-      <div class="slider__text-list">
-        <div
-          class="slider__text slider__text--active"
-          style="background-color: rgb(54, 131, 162)"
-        >
-          <h1>Beautiful Landscape 1</h1>
-        </div>
-        <div class="slider__text" style="background-color: rgb(172, 54, 131)">
-          <h1>Beautiful Landscape 2</h1>
-        </div>
-        <div class="slider__text" style="background-color: rgb(192, 157, 112)">
-          <h1>Beautiful Landscape 3</h1>
-        </div>
-        <div class="slider__text" style="background-color: rgb(97, 162, 87)">
-          <h1>Beautiful Landscape 4</h1>
-        </div>
-        <div class="slider__text" style="background-color: rgb(27, 96, 119)">
-          <h1>Beautiful Landscape 5</h1>
-        </div>
+      <div class="slides">
+        <!-- clone last -->
+        <div class="slide slide3">Slide 3</div>
+
+        <div class="slide slide1">Slide 1</div>
+        <div class="slide slide2">Slide 2</div>
+        <div class="slide slide3">Slide 3</div>
+
+        <!-- clone first -->
+        <div class="slide slide1">Slide 1</div>
       </div>
 
-      <div class="slider__controls">
-        <div class="slider__control slider__control--prev">
-          <button>&larr; Prev</button>
-        </div>
-        <div class="slider__control slider__control--next">
-          <button>Next &rarr;</button>
-        </div>
-      </div>
+      <button id="prev">⟵</button>
+      <button id="next">⟶</button>
     </div>
 
     <script>
-      const slides = document.querySelectorAll(".slider__text");
-      let currentIndex = 0;
+      const slides = document.querySelector(".slides");
+      const slideElements = document.querySelectorAll(".slide");
+      const prev = document.getElementById("prev");
+      const next = document.getElementById("next");
 
-      function showSlide(index) {
-        slides.forEach((slide, i) => {
-          slide.classList.toggle("slider__text--active", i === index);
-        });
-      }
+      const total = slideElements.length;
+      let index = 1;
 
-      document
-        .querySelector(".slider__control--prev button")
-        .addEventListener("click", () => {
-          currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-          showSlide(currentIndex);
-        });
+      slides.style.transform = `translateX(-${index * 100}vw)`;
 
-      document
-        .querySelector(".slider__control--next button")
-        .addEventListener("click", () => {
-          currentIndex = (currentIndex + 1) % slides.length;
-          showSlide(currentIndex);
-        });
+      next.addEventListener("click", () => {
+        if (index >= total - 1) return;
+        index++;
+        slides.style.transition = "transform 0.6s ease-in-out";
+        slides.style.transform = `translateX(-${index * 100}vw)`;
+        console.log(index);
+      });
 
-      // Initialize first slide
-      showSlide(currentIndex);
+      prev.addEventListener("click", () => {
+        if (index <= 0) return;
+        index--;
+        slides.style.transition = "transform 0.6s ease-in-out";
+        slides.style.transform = `translateX(-${index * 100}vw)`;
+        console.log(index);
+      });
+
+      slides.addEventListener("transitionend", () => {
+        // If we hit cloned slides, jump instantly
+        if (
+          slideElements[index].textContent === "Slide 1" &&
+          index === total - 1
+        ) {
+          slides.style.transition = "none";
+          index = 1;
+          slides.style.transform = `translateX(-${index * 100}vw)`;
+          console.log("Jumped to first real slide", index);
+        }
+
+        if (slideElements[index].textContent === "Slide 3" && index === 0) {
+          slides.style.transition = "none";
+          index = total - 2;
+          slides.style.transform = `translateX(-${index * 100}vw)`;
+          console.log("Jumped to last real slide", index);
+        }
+      });
     </script>
   </body>
 </html>
