@@ -1,129 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/lenis@1.2.3/dist/lenis.css">
     <title>Document</title>
     <style>
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        body {
-            font-family: fantasy;
-            background-color: #fff;
-            color: #000;
-        }
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: #121212;
+  cursor: none;
+}
 
-        section {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-        }
+h1 {
+  font-size: 3rem;
+  color: white;
+  font-weight: 600;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+p {
+  font-size: 1.5rem;
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 100;
+}
 
-        .intro,
-        .outro {
-            height: 100vh;
-            width: 100%;
-            background-color: #50e6d4;
-        }
+.wrapper {
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+}
 
-        .title {
-            height: 100svh;
-            display: flex;
-            align-items: center;
-            background-color: rgb(0, 255, 17);
-        }
+.project-list {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 8em;
+  gap: 2em;
+}
 
-        h1 {
-            font-size: 5rem;
-        }
+.project {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 2em;
+  border-bottom: 0.5px solid rgb(185, 185, 185);
+  mix-blend-mode: difference;
+}
 
-        .title-container {
-            position: relative;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            will-change: transform;
-            background-color: blue;
-        }
+.cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 250px;
+  width: 200px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease;
+  will-change: transform;
+}
+
+.cursor img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
     </style>
 </head>
-
 <body>
-    <section class="intro"></section>
-    <section class="main">
-        <div class="title">
-            <div class="title-container">
-                <h1>Neon Dreams</h1>
-            </div>
+    <div class="cursor"><img src="" alt=""></div>
+    <div class="wrapper">
+      <div class="project-list">
+        <div class="project p-1" data-image="../images/img1.webp">
+          <h1 class="project-title">E-Commerce Platform</h1>
+          <p class="project-category">Web Development</p>
         </div>
-    </section>
-    <section class="outro"></section>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
-    <script src="https://unpkg.com/lenis@1.2.3/dist/lenis.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            gsap.registerPlugin(ScrollTrigger, SplitText);
-
-            const lenis = new Lenis({
-                duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-                smoothWheel: true,
-                smoothTouch: false,
-            });
-
-            lenis.on('scroll', ScrollTrigger.update);
-            gsap.ticker.add((time) => {
-                lenis.raf(time * 1000)
-            });
-            gsap.ticker.lagSmoothing(0);
-
-            // split "Neon Dreams" into characters
-            const split = SplitText.create(".title-container h1", { type: "chars" });
-            const chars = split.chars;
-
-            // set all characters offscreen (alternate up/down)
-            chars.forEach((char, i) => {
-                const yStart = i % 2 === 0 ? -150 : 150;
-                gsap.set(char, { y: yStart, opacity: 0 });
-            });
-
-            // create scroll animation
-            ScrollTrigger.create({
-                trigger: ".main",
-                start: "top 50%",
-                end: "50% top",
-                scrub: true,
-                markers: true,
-                onUpdate: (self) => {
-                    chars.forEach((char, i) => {
-                        const delay = i * 0.05; // stagger per letter
-                        let progress = 0;
-
-                        if (self.progress >= delay) {
-                            progress = Math.min(1, (self.progress - delay) / 0.3);
-                        }
-
-                        // interpolate from offscreen → in place
-                        const yStart = i % 2 === 0 ? -150 : 150;
-                        const y = yStart - progress * yStart;
-
-                        gsap.set(char, { y, opacity: progress });
-                    });
-                },
-            });
-        });
-    </script>
+        <div class="project p-2" data-image="../images/img2.webp">
+          <h1 class="project-title">Mobile App Design</h1>
+          <p class="project-category">UI/UX Design</p>
+        </div>
+        <div class="project p-3" data-image="../images/img3.webp">
+          <h1 class="project-title">Data Analytics Dashboard</h1>
+          <p class="project-category">Data Visualization</p>
+        </div>
+        <div class="project p-4" data-image="../images/img4.webp">
+          <h1 class="project-title">AI Chat Assistant</h1>
+          <p class="project-category">Machine Learning</p>
+        </div>
+        <div class="project p-5" data-image="../images/img5.webp">
+          <h1 class="project-title">Social Media Feed</h1>
+          <p class="project-category">Frontend Development</p>
+        </div>
+        </div>
+      </div>
+    </div>
 </body>
-
 </html>
