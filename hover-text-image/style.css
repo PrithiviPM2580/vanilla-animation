@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: #121010;
+}
+
+.container {
+  width: 100%;
+  min-height: 100svh;
+  padding: 10em 10em 10em 10em;
+}
+
+.projects {
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  gap: 10em;
+}
+
+.project {
+  position: relative;
+  overflow: hidden;
+}
+
+.projects h1 {
+  width: max-content;
+  font-size: 8rem;
+  color: #9d9d9d;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  position: relative;
+  display: inline-block;
+}
+
+/* Overlay text that reveals left-to-right using background-clip */
+.projects h1::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(90deg, #ffffff, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s ease-in-out;
+  will-change: background-size;
+  pointer-events: none;
+}
+.projects h1:hover::after {
+  background-size: 100% 100%;
+}
+
+.img {
+  position: fixed;
+  top: 30%;
+  left: 55%;
+  width: 550px;
+  height: 350px;
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: left left;
+  transition: transform 0.4s ease-in-out;
+  will-change: transform;
+}
+.img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
