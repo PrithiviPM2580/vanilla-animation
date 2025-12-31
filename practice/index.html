@@ -3,55 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Transform Origin Practice</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      div {
-        height: 100svh;
-        width: 100%;
+      body {
         display: flex;
-        align-items: center;
         justify-content: center;
-        background-color: #000;
-        overflow: hidden;
+        align-items: center;
+        height: 100vh;
+        background: #f0f0f0;
       }
 
-      h1 {
-        position: relative;
-        font-size: 10rem;
-        color: #cacaca;
-        text-transform: uppercase;
-        display: inline-block;
+      .box {
+        width: 100px;
+        height: 100px;
+        background: teal;
+        transition: transform 0.5s;
       }
 
-      h1::after {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: attr(data-text);
-        color: transparent;
-        -webkit-text-fill-color: transparent;
-        background-image: linear-gradient(10deg, #fff, #fff);
-        background-clip: text;
-        background-size: 0% 100%;
-        background-repeat: no-repeat;
-        transition: background-size 0.4s ease-in-out;
-        will-change: background-size;
-        pointer-events: none;
-      }
+      /* Always set transform-origin before hover */
+      .box.bottom {
+        transform-origin: 50% 100%;
+      } /* bottom center */
+      .box.top {
+        transform-origin: 50% 0%;
+      } /* top center */
+      .box.left {
+        transform-origin: 0% 50%;
+      } /* left center */
+      .box.right {
+        transform-origin: 100% 50%;
+      } /* right center */
 
-      h1:hover::after {
-        background-size: 100% 100%;
+      .box.bottom:hover {
+        transform: scaleY(2);
+      }
+      .box.top:hover {
+        transform: scaleY(2);
+      }
+      .box.left:hover {
+        transform: scaleX(2);
+      }
+      .box.right:hover {
+        transform: scaleX(2);
       }
     </style>
   </head>
   <body>
-    <div>
-      <h1 data-text="My Name is Prithivi">My Name is Prithivi</h1>
-    </div>
+    <div class="box bottom"></div>
+    <div class="box top" style="margin-left: 20px"></div>
+    <div class="box left" style="margin-left: 20px"></div>
+    <div class="box right" style="margin-left: 20px"></div>
   </body>
 </html>

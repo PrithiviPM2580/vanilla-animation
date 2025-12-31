@@ -23,6 +23,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  opacity: 1;
 }
 .navs .nav {
   font-size: 1rem;
@@ -60,33 +61,35 @@ img {
   object-fit: cover;
 }
 
-.header{
-    position: absolute;
-    top: 60%;
-    left: 30%;
-    transform: translate(-50%, -50%);
-    z-index: 3;
+.header {
+  position: absolute;
+  top: 60%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
 }
-.header h1{
-    font-size: 3rem;
-    line-height: 1.5em;
-    font-weight: bold;
+.header h1 {
+  font-size: 3rem;
+  line-height: 1.5em;
+  font-weight: bold;
 }
 
-.wrapper{
-    position: fixed;
-    height: 100svh;
-    width: 100%;
-    background-color: #000;
-    z-index: 5;
+.wrapper {
+  position: fixed;
+  height: 100svh;
+  width: 100%;
+  background-color: #000;
+  z-index: 5;
 }
-.loader{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 8%;
-    height: 20vh;
-    z-index: 5;
-    background-color: #fff;
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(80px) scaleY(0);
+  transform-origin: 50% 100%;
+  width: 8%;
+  height: 20vh;
+  z-index: 5;
+  background-color: #fff;
+  opacity: 0; /* hide until GSAP drives it */
 }
