@@ -33,7 +33,7 @@ body {
 .nav .link {
   display: flex;
   align-items: center;
-  gap: 1em;
+  gap: 3em;
 }
 
 .text {
@@ -49,6 +49,7 @@ body {
 .text h1 {
   font-size: 8rem;
   transform: translateY(-100%);
+  color: rgb(62, 59, 59);
 }
 
 .images {
