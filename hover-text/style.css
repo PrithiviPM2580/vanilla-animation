@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100svh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 3em;
+  background-color: #121212;
+}
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+p {
+  font-size: 100px;
+  line-height: 100px;
+  color: #fff;
+  letter-spacing: -0.05em;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+}
+
+p:hover .letter,
+p.play .letter {
+  transform: translateY(-100%);
+}
+
+p .block:last-child {
+  color: #c93d4b;
+}
+
+p .letter {
+  display: inline-block;
+  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.letter:nth-child(1) {
+  transition-delay: 0s;
+}
+
+.letter:nth-child(2) {
+  transition-delay: 0.015s;
+}
+.letter:nth-child(3) {
+  transition-delay: 0.03s;
+}
+.letter:nth-child(4) {
+  transition-delay: 0.045s;
+}
+.letter:nth-child(5) {
+  transition-delay: 0.06s;
+}
+.letter:nth-child(6) {
+  transition-delay: 0.075s;
+}
+.letter:nth-child(7) {
+  transition-delay: 0.09s;
+}
+.letter:nth-child(8) {
+  transition-delay: 0.105s;
+}
+.letter:nth-child(9) {
+  transition-delay: 0.12s;
+}
