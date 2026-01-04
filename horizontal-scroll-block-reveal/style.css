@@ -1,21 +1,74 @@
-html,
-body {
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap");
+
+* {
   margin: 0;
   padding: 0;
-  overflow: hidden; /* remove vertical scroll */
+  box-sizing: border-box;
+  font-family: "Bodoni Moda", serif;
 }
 
-.horizontal-container {
-  display: flex; /* layout in a row */
-  width: 400vw; /* total width = 4 sections x 100vw */
-  height: 100vh;
+html,
+body {
+  height: 100svh;
+  width: 100%;
+  background-color: #978f84;
+  overflow: hidden;
 }
 
-.section {
-  flex: 0 0 100vw; /* each section takes full viewport width */
-  height: 100vh;
+.container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.sections {
+  height: 100svh;
+  width: 500vw;
   display: flex;
-  justify-content: center;
+}
+
+.sections section {
+  flex: 0 0 100vw;
+  display: flex;
   align-items: center;
-  font-size: 3rem;
+  justify-content: center;
+  height: 100%;
+}
+
+.sections h1 {
+  font-size: 6rem;
+  letter-spacing: -0.01em;
+  color: black;
+  width: 50%;
+}
+.navs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+}
+.navs .nav-link {
+  width: 5em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  padding-block: 3em;
+  border-right: 3px solid black;
+  background-color: red;
+}
+
+.nav-link h1 {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-size: 2rem;
+}
+.nav-link p {
+  font-size: 2rem;
 }
