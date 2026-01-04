@@ -1,0 +1,21 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* remove vertical scroll */
+}
+
+.horizontal-container {
+  display: flex; /* layout in a row */
+  width: 400vw; /* total width = 4 sections x 100vw */
+  height: 100vh;
+}
+
+.section {
+  flex: 0 0 100vw; /* each section takes full viewport width */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+}
