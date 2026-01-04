@@ -37,13 +37,14 @@ body {
 }
 
 .sections h1 {
-  font-size: 6rem;
-  letter-spacing: -0.01em;
+  font-size: 4rem;
+  letter-spacing: -0.05em;
   color: black;
-  width: 50%;
+  width: 40%;
 }
 .navs {
-  position: absolute;
+  position: fixed;
+  width: 100%;
   top: 0;
   left: 0;
   z-index: 10;
@@ -55,12 +56,14 @@ body {
   width: 5em;
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   flex-direction: column;
-  padding-block: 3em;
+  padding: 3em 1em;
   border-right: 3px solid black;
-  background-color: red;
+  background: transparent;
+  transition: all 0.5s ease-in;
+  /* background-color: #978f84; */
 }
 
 .nav-link h1 {
@@ -71,4 +74,7 @@ body {
 }
 .nav-link p {
   font-size: 2rem;
+}
+.nav-link.active {
+  flex: 1;
 }
