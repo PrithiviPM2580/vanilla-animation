@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   slides.forEach((slide, index) => {
     if (index !== 0) {
-      const img = document.querySelector("img");
+      const img = slide.querySelector("img");
       gsap.set(img, { scale: 2, top: "4em" });
     }
   });
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     gsap.to(
       slide,
       {
-        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+        clipPath: "polygon(0 0%, 100% 0%, 100% 100%, 0 100%)",
         duration: 2,
         ease: "power4.inOut",
         onComplete: () => {
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     gsap.to(slide, {
-      clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
+      clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
       duration: 2,
       ease: "power4.inOut",
     });
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
     gsap.to(
       slide,
       {
-        clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
+        clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
         duration: 2,
         ease: "power4.inOut",
         onComplete: () => {
