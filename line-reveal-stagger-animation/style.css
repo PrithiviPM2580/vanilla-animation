@@ -12,10 +12,6 @@ body {
   font-family: "Bebas Neue", sans-serif;
 }
 
-span {
-  font-family: "Nosifer", sans-serif;
-}
-
 #overlay-light {
   position: absolute;
   width: 100%;
@@ -80,4 +76,31 @@ span {
   white-space: nowrap;
   overflow: hidden;
   z-index: 3;
+}
+
+.marquee span {
+  font-family: "Nosifer", sans-serif;
+  letter-spacing: -10px;
+  color: #000;
+  mix-blend-mode: normal !important;
+  font-size: 8rem;
+  text-transform: uppercase;
+  display: inline-block;
+  padding-left: -10%;
+  animation: marquee-animation 80s linear infinite;
+}
+
+@keyframes marquee-animation {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
+
+img {
+  position: relative;
+  top: 40px;
+  width: 200px;
 }
