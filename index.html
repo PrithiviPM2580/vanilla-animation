@@ -6,6 +6,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="./style.css" />
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
       * {
         margin: 0;
         padding: 0;
@@ -14,165 +16,183 @@
 
       html,
       body {
+        height: 100%;
         width: 100%;
-        height: 100svh;
         overflow: hidden;
-        background-color: #e3dcc7;
+        background-color: #000;
+        color: #fff;
+        font-family: "Bebas Neue", sans-serif;
       }
 
       .container {
-        position: relative;
-        width: 100%;
         height: 100svh;
-        overflow: hidden;
+        width: 100%;
+        background-color: #000;
       }
 
-      .nav {
-        position: absolute;
+      .navs {
+        position: fixed;
         top: 0;
-        left: 0;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1em 3em;
-        color: rgb(0, 0, 0, 0.6);
+        right: 0;
+        width: max-content;
+        height: max-content;
       }
-      .nav .link {
-        display: flex;
-        align-items: center;
-        gap: 3em;
+      .logo {
+        height: 50px;
+        width: 50px;
+        border-radius: 6px;
       }
 
-      .text {
-        position: absolute;
-        width: 100%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        overflow: hidden;
+      .logo-1 {
+        background-color: #dd1804;
       }
-
-      .text h1 {
-        font-size: 8rem;
-        transform: translateY(-100%);
-        color: rgb(62, 59, 59);
+      .logo-2 {
+        background-color: #d72332;
       }
-
-      .images {
-        position: absolute;
-        top: 50%;
-        left: 50%;
+      .logo-3 {
+        background-color: #ef5605;
+      }
+      .nav {
+        position: relative;
         width: 300px;
-        height: 300px;
-        transform: translate(-50%, -50%);
-        overflow: hidden;
+        height: 100px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        color: #fff;
+        margin: 1em;
+        padding: 15px;
+        font-size: 13px;
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(16px);
+        border-radius: 8px;
+        transition: background-color 0.5s, color 0.5s;
+        cursor: pointer;
       }
-      .images .image {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        will-change: transform;
+
+      .toggle {
+        position: relative;
+        justify-content: flex-end;
+        display: none;
       }
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+
+      .toggle button {
+        border: none;
+        outline: none;
+        background-color: #2a2a2a;
+        color: #fff;
+        margin: 0 1em;
+        padding: 8px 16px;
+        border-radius: 20px;
+        transition: background-color 0.5s, color 0.5s;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #fff;
+        color: #2a2a2a;
+      }
+
+      .first-nav {
+        top: 0;
+      }
+
+      .second-nav {
+        top: -100px;
+      }
+      .third-nav {
+        top: -200px;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="nav">
-        <div class="logo">Logo</div>
-        <div class="name">PPM</div>
-        <div class="link">
-          <p>Home</p>
-          <p>Contact</p>
-          <p>About</p>
+    <div class="container"></div>
+    <div class="navs">
+      <div class="first-nav nav">
+        <div class="logo-1 logo"></div>
+        <div class="titles">
+          <h1>Creative</h1>
+          <p>Design for the better future</p>
         </div>
       </div>
-      <div class="text">
-        <h1>Reach the fullest</h1>
+      <div class="second-nav nav">
+        <div class="logo-2 logo"></div>
+        <div class="titles">
+          <h1>Awkward</h1>
+          <p>Showcase the best design</p>
+        </div>
       </div>
-
-      <div class="images">
-        <div class="image image1">
-          <img src="../images/img1.webp" alt="Image 1" />
+      <div class="third-nav nav">
+        <div class="logo-3 logo"></div>
+        <div class="titles">
+          <h1>Future</h1>
+          <p>Innovate and inspire</p>
         </div>
-        <div class="image image2">
-          <img src="../images/img2.webp" alt="Image 2" />
-        </div>
-        <div class="image image3">
-          <img src="../images/img3.webp" alt="Image 3" />
-        </div>
-        <div class="image image4">
-          <img src="../images/img4.webp" alt="Image 4" />
-        </div>
-        <div class="image image5">
-          <img src="../images/img5.webp" alt="Image 5" />
-        </div>
-        <div class="image image6">
-          <img src="../images/img6.webp" alt="Image 6" />
-        </div>
+      </div>
+      <div class="toggle">
+        <button>Show Less</button>
       </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
     <script src="./script.js">
             document.addEventListener("DOMContentLoaded", function () {
-        const images = document.querySelectorAll(".image");
+        const thirdNav = document.querySelector(".third-nav");
+        const toggleButton = document.querySelector(".toggle button");
+        const navs = document.querySelectorAll(".nav");
+        const toggleDiv = document.querySelector(".toggle");
 
-        const splitText = new SplitText(".text h1", { type: "words,chars" });
+        let isNavOpen = false;
 
-        images.forEach((img, index) => {
-          if (index !== 0) {
-            gsap.set(img, {
-              y: "100%",
+        thirdNav.addEventListener("click", function () {
+          if (!isNavOpen) {
+            gsap.to(navs, {
+              top: "0px",
+              duration: 1,
+              ease: "power4.inOut",
             });
+
+            gsap.to(toggleDiv, {
+              delay: 0.4,
+              display: "flex",
+              opacity: 1,
+              duration: 0.4,
+              ease: "power4.inOut",
+            });
+
+            isNavOpen = true;
           }
         });
 
-        const tl = gsap.timeline();
+        toggleButton.addEventListener("click", function () {
+          if (isNavOpen) {
+            gsap.to(".first-nav", {
+              top: "0px",
+              duration: 1,
+              ease: "power4.inOut",
+            });
+            gsap.to(".second-nav", {
+              top: "-100px",
+              duration: 1,
+              ease: "power4.inOut",
+            });
+            gsap.to(".third-nav", {
+              top: "-200px",
+              duration: 1,
+              ease: "power4.inOut",
+            });
 
-        tl.to(".image", {
-          y: "0%",
-          opacity: 1,
-          duration: 1,
-          ease: "power2.easeOut",
-          stagger: 0.5,
-        })
-          .to(".images", {
-            y: "25rem",
-            scale: 3,
-            duration: 1,
-            ease: "power2.easeIn",
-            transformOrigin: "center top",
-            delay: 1,
-          })
-          .to(
-            splitText.chars,
-            {
-              y: "100%",
-              duration: 0.6,
-              ease: "power2.easeOut",
-              stagger: 0.05,
-            },
-            "-=0.9"
-          )
-          .from(
-            ".nav",
-            {
-              y: -50,
+            gsap.to(toggleDiv, {
+              delay: 0,
+              display: "none",
               opacity: 0,
-              duration: 0.5,
-              ease: "power2.out",
-              stagger: 0.2,
-            },
-            "-=0.5"
-          );
+              duration: 0.4,
+              ease: "power4.inOut",
+            });
+
+            isNavOpen = false;
+          }
+        });
       });
     </script>
   </body>
