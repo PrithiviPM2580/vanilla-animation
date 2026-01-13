@@ -156,4 +156,88 @@ a {
   transform-style: preserve-3d;
   will-change: transform;
   transform: translateZ(-550px) rotateY(0deg);
+  background-color: blue;
+}
+
+.scene:nth-child(even) .carousel {
+  transform: rotateZ(-550px) rotateY(45deg);
+}
+.carousel__cell {
+  position: absolute;
+  width: 350px;
+  height: 420px;
+  left: 0;
+  top: 0;
+  transform-style: preserve-3d;
+  background-color: red;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.card__face {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  background-image: var(--img);
+  background-size: cover;
+}
+
+.card__face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+}
+
+.card__face--back {
+  transform: rotateY(180deg);
+}
+
+.preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 15vw;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  grid-row-gap: 1rem;
+  /* opacity: 0; */
+  pointer-events: none;
+}
+
+.preview__header{
+  display: flex;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: space-between;
+  line-height: 1;
+}
+
+.preview__title{
+  margin: 0;
+}
+
+.preview__close{
+  background-color: none;
+  text-transform: inherit;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+  color: var(--color-close);
+  &:hover,
+  &:focus{
+    outline: none;
+    color: var(--color-link-hover);
+  } 
 }
