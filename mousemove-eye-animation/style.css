@@ -80,7 +80,7 @@ div {
 
 .text .letter {
   display: inline-block;
-  transition: tranform 0.6s cubic-bezier(0.76, 0, 0.24);
+  transition: transform 0.4s cubic-bezier(0.47, 0, 0.745, 0.715);
 }
 
 .letter:nth-child(1) {
