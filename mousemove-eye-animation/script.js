@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const svg = document.querySelector("#svg");
-  const mouse = svg.createSVGPoint();
 
   const leftEye = createEye("#left-eye");
   const rightEye = createEye("#right-eye");
@@ -35,42 +34,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("mousemove", onMouseMove);
 
-  function onFrame() {
-    let point = mouse.matrixTransform(svg.getScreenCTM().inverse());
-
-    leftEye.rotateTo(point);
-    rightEye.rotateTo(point);
-
-    requestId = null;
-  }
-
   function onMouseMove(e) {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
+    // 1️⃣ Create a screen-space mouse point
+    const pt = new DOMPoint(e.clientX, e.clientY);
 
+    // 2️⃣ Convert screen coordinates → SVG coordinates
+    const svgPoint = pt.matrixTransform(svg.getScreenCTM().inverse());
+
+    // 3️⃣ Run animation once per frame
     if (!requestId) {
-      requestId = requestAnimationFrame(onFrame);
+      requestId = requestAnimationFrame(() => {
+        leftEye.rotateTo(svgPoint);
+        rightEye.rotateTo(svgPoint);
+        requestId = null;
+      });
     }
   }
 
   function createEye(selector) {
     const element = document.querySelector(selector);
+    const outerCircle = element.querySelector(".eye-outer");
+    const innerCircle = element.querySelector(".eye-inner");
 
-    element.style.transformOrigin = "center";
+    // get eye center in SVG coordinates
+    const cx = parseFloat(outerCircle.getAttribute("cx"));
+    const cy = parseFloat(outerCircle.getAttribute("cy"));
+    const outerRadius = parseFloat(outerCircle.getAttribute("r"));
+    const innerRadius = parseFloat(innerCircle.getAttribute("r"));
 
-    let box = element.getBBox();
-    let cx = box.x + box.width / 2;
-    let cy = box.y + box.height / 2;
+    // Maximum distance the pupil can move from center
+    const maxDistance = outerRadius - innerRadius - 5; // 5px padding
 
     function rotateTo(point) {
-      let dx = point.x - cx;
-      let dy = point.y - cy;
-      let angle = (Math.atan2(dy, dx) * 180) / Math.PI;
-      element.style.transform = `rotate(${angle}deg)`;
+      const dx = point.x - cx;
+      const dy = point.y - cy;
+
+      // Calculate distance and angle to mouse
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const angle = Math.atan2(dy, dx);
+
+      // Constrain pupil movement within the eye boundary
+      const limitedDistance = Math.min(distance, maxDistance);
+
+      // Calculate new pupil position
+      const newX = cx + Math.cos(angle) * limitedDistance;
+      const newY = cy + Math.sin(angle) * limitedDistance;
+
+      // Move the inner circle (pupil)
+      innerCircle.setAttribute("cx", newX);
+      innerCircle.setAttribute("cy", newY);
     }
 
     return {
-      element,
       rotateTo,
     };
   }
