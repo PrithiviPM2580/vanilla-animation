@@ -1,78 +1,69 @@
 document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.querySelector(".overlay");
-
-  gsap.set(overlay, { opacity: 0 });
-
   const squareContainer = document.querySelector(".square-container");
+  const toggleBtn = document.querySelector(".toggle");
+
   const squareSize = 100;
-  const screenWidth = window.innerWidth;
-  const screenHeight = window.innerHeight;
-  const cols = Math.ceil(screenWidth / squareSize);
-  const rows = Math.ceil(screenHeight / squareSize);
-  const totalSquares = cols * rows;
-
-  squareContainer.style.width = `${cols * squareSize}px`;
-  squareContainer.style.height = `${rows * squareSize}px`;
-
   let squares = [];
-
-  function createSquare() {
-    for (let i = 0; i < totalSquares; i++) {
-      const square = document.createElement("div");
-      square.classList.add("square");
-      squareContainer.appendChild(square);
-      squares.push(square);
-    }
-  }
-
-  function animateSquares() {
-    gsap.fromTo(
-      squares,
-      {
-        opacity: 0,
-      },
-      {
-        opacity: 1,
-        delay: 0.5,
-        duration: 0.0005,
-        stagger: {
-          each: 0.004,
-          from: "random",
-        },
-      },
-    );
-
-    gsap.to(squares, {
-      opacity: 0,
-      delay: 1.5,
-      duration: 0.0005,
-      stagger: {
-        each: 0.004,
-        from: "random",
-      },
-    });
-  }
-
   let overlayVisible = false;
+  let tl = null;
 
-  document.querySelector(".toggle").addEventListener("click", () => {
-    console.log("clicked");
+  gsap.set(overlay, { opacity: 0, visibility: "hidden", zIndex: -1 });
+
+  function createSquares() {
+    const cols = Math.ceil(window.innerWidth / squareSize);
+    const rows = Math.ceil(window.innerHeight / squareSize);
+    const total = cols * rows;
+
+    squareContainer.style.width = `${cols * squareSize}px`;
+    squareContainer.style.height = `${rows * squareSize}px`;
+
+    if (squares.length === total) return;
+
     squareContainer.innerHTML = "";
     squares = [];
-    createSquare();
-    animateSquares();
 
-    gsap.to(overlay, 0.025, {
-      opacity: overlayVisible ? 0 : 1,
-      visibility: overlayVisible ? "hidden" : "visible",
-      delay: 1.15,
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 0; i < total; i++) {
+      const square = document.createElement("div");
+      square.className = "square";
+      fragment.appendChild(square);
+      squares.push(square);
+    }
+
+    squareContainer.appendChild(fragment);
+  }
+
+  function animateSquares(show) {
+    // 🔥 THIS is what was missing
+    if (tl) tl.kill();
+
+    gsap.set(squares, { opacity: 0 });
+
+    tl = gsap.timeline();
+
+    tl.to(squares, {
+      opacity: 1,
+      duration: 0.15,
+      stagger: { each: 0.004, from: "random" },
+    }).to(squares, {
+      opacity: 0,
+      duration: 0.15,
+      stagger: { each: 0.004, from: "random" },
     });
 
-    gsap.to(overlay, {
-      zIndex: overlayVisible ? -1 : 0,
-      delay: overlayVisible ? 0 : 2,
+    tl.to(overlay, {
+      opacity: show ? 1 : 0,
+      visibility: show ? "visible" : "hidden",
+      zIndex: show ? 0 : -1,
+      duration: 0.2,
     });
+  }
 
+  toggleBtn.addEventListener("click", () => {
+    createSquares();
+    animateSquares(!overlayVisible);
     overlayVisible = !overlayVisible;
   });
 });
