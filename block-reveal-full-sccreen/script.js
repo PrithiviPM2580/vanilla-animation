@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       {
         opacity: 1,
-        delat: 0.5,
-        duration: 0.005,
+        delay: 0.5,
+        duration: 0.0005,
         stagger: {
           each: 0.004,
           from: "random",
