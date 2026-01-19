@@ -5,55 +5,277 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Tiny5&display=swap");
+
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
 
-      .grid-container {
-        display: grid;
-        font-size: 40px;
-        grid-template-columns: 100px 200px;
-        grid-template-rows: 50px 100px 200px 300px;
+      html,
+      body {
+        height: 100svh;
+        width: 100%;
+        overflow: hidden;
+        font-family: "Tiny5", sans-serif;
       }
 
-      .grid-items-1 {
-        background-color: #ff6b6b;
+      .content {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100svh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        z-index: -2;
+        pointer-events: none;
       }
-      .grid-items-2 {
-        background-color: #4ecdc4;
+
+      .content h1 {
+        font-size: 8rem;
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 1.05;
       }
-      .grid-items-3 {
-        background-color: #45b7d1;
+
+      .toggle {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1em 0;
+        padding: 0.8em 2.5em;
+        background-color: rgba(255, 255, 255, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 30px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 0 50px -10px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+        z-index: 1000;
       }
-      .grid-items-4 {
-        background-color: #ffa07a;
+
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 1em 3em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 100;
+        font-size: 20px;
+        mix-blend-mode: difference;
+        color: #fff;
       }
-      .grid-items-5 {
-        background-color: #98d8c8;
+
+      .nav p {
+        cursor: pointer;
       }
-      .grid-items-6 {
-        background-color: #f7dc6f;
+
+      .navs {
+        display: flex;
+        gap: 2em;
       }
-      .grid-items-7 {
-        background-color: #bb8fce;
+
+      .square-container {
+        width: 100%;
+        height: 100svh;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: flex-start;
+        overflow: hidden;
+        pointer-events: none;
       }
-      .grid-items-8 {
-        background-color: #85c1e2;
+
+      .square {
+        width: 100px;
+        height: 100px;
+        background-color: #fd552f;
+        pointer-events: none;
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100svh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8em;
+        background-color: #242424;
+        color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .overlay .h1 {
+        font-size: 6rem;
+        color: #fd552f;
+      }
+
+      .menus {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+      }
+
+      .menu-nav {
+        display: flex;
+        gap: 1em;
+        font-size: 3rem;
+        text-transform: uppercase;
+      }
+
+      /* GRID FLASH USING PSEUDO ELEMENT */
+      .overlay::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background:
+          repeating-linear-gradient(
+            0deg,
+            #fd552f 0 100px,
+            transparent 100px 200px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            #fd552f 0 100px,
+            transparent 100px 200px
+          ),
+          repeating-linear-gradient(
+            0deg,
+            rgba(253, 85, 47, 0.7) 0 100px,
+            transparent 100px 200px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(253, 85, 47, 0.7) 0 100px,
+            transparent 100px 200px
+          );
+
+        background-size:
+          200px 200px,
+          200px 200px,
+          200px 200px,
+          200px 200px;
+
+        background-position:
+          0 0,
+          0 0,
+          50px 80px,
+          -80px 30px;
+
+        opacity: 0;
+        transform: scale(1.05);
+      }
+
+      /* ACTIVE STATE */
+      body.menu-open .overlay {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        z-index: 0;
+      }
+
+      /* TRIGGER GRID FLASH FIRST */
+      body.menu-open .overlay::before {
+        animation: gridFlash 0.35s ease-out forwards;
+      }
+
+      @keyframes gridFlash {
+        0% {
+          opacity: 0;
+          background-position:
+            0 0,
+            0 0,
+            50px 80px,
+            -80px 30px;
+        }
+
+        30% {
+          opacity: 1;
+        }
+
+        60% {
+          background-position:
+            40px 60px,
+            -60px 20px,
+            100px 20px,
+            -20px 120px;
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 0;
+        }
       }
     </style>
   </head>
   <body>
-    <div class="grid-container">
-      <div class="grid-items-1">1</div>
-      <div class="grid-items-2">2</div>
-      <div class="grid-items-3">3</div>
-      <div class="grid-items-4">4</div>
-      <div class="grid-items-5">5</div>
-      <div class="grid-items-6">6</div>
-      <div class="grid-items-7">7</div>
-      <div class="grid-items-8">8</div>
+    <div class="toggle">
+      <div>&#9776;</div>
     </div>
+
+    <div class="nav">
+      <p class="logo">Logo</p>
+      <div class="navs">
+        <p>Home</p>
+        <p>About</p>
+        <p>Services</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h1>
+        We <br />
+        Help <br />brands <br />
+        explor <br />
+        vibes
+      </h1>
+    </div>
+
+    <div class="overlay">
+      <div class="h1">Work With us</div>
+      <div class="menus">
+        <div class="menu-nav">
+          <p>(01)</p>
+          <p>Contact</p>
+        </div>
+        <div class="menu-nav">
+          <p>(02)</p>
+          <p>Portfolio</p>
+        </div>
+        <div class="menu-nav">
+          <p>(03)</p>
+          <p>About Us</p>
+        </div>
+        <div class="menu-nav">
+          <p>(04)</p>
+          <p>Services</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const toggle = document.querySelector(".toggle");
+
+      toggle.addEventListener("click", () => {
+        document.body.classList.toggle("menu-open");
+      });
+    </script>
   </body>
 </html>
