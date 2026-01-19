@@ -31,8 +31,9 @@ body {
 span {
   font-size: 10vw;
   text-transform: uppercase;
-  transition: 400ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: transform 400ms cubic-bezier(0.075, 0.82, 0.165, 1);
   cursor: pointer;
   transform-origin: bottom;
   color: rgb(162, 31, 31);
+  will-change: transform;
 }

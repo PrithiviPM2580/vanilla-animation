@@ -5,276 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Tiny5&display=swap");
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      html,
       body {
-        height: 100svh;
-        width: 100%;
-        overflow: hidden;
-        font-family: "Tiny5", sans-serif;
+        font-family: sans-serif;
       }
-
-      .content {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100svh;
+      .container {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #fff;
-        z-index: -2;
-        pointer-events: none;
+        gap: 2px;
+        user-select: none;
       }
-
-      .content h1 {
-        font-size: 8rem;
-        text-transform: uppercase;
-        text-align: center;
-        line-height: 1.05;
-      }
-
-      .toggle {
-        position: fixed;
-        top: 0;
-        left: 50%;
-        transform: translate(-50%, 0);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 1em 0;
-        padding: 0.8em 2.5em;
-        background-color: rgba(255, 255, 255, 0.75);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        border-radius: 30px;
-        backdrop-filter: blur(20px);
-        box-shadow: 0 0 50px -10px rgba(0, 0, 0, 0.25);
-        cursor: pointer;
-        z-index: 1000;
-      }
-
-      .nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 1em 3em;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        z-index: 100;
-        font-size: 20px;
-        mix-blend-mode: difference;
-        color: #fff;
-      }
-
-      .nav p {
-        cursor: pointer;
-      }
-
-      .navs {
-        display: flex;
-        gap: 2em;
-      }
-
-      .square-container {
-        width: 100%;
-        height: 100svh;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-content: flex-start;
-        overflow: hidden;
-        pointer-events: none;
-      }
-
-      .square {
-        width: 100px;
-        height: 100px;
-        background-color: #fd552f;
-        pointer-events: none;
-      }
-
-      .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100svh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8em;
-        background-color: #242424;
-        color: #fff;
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        z-index: -1;
-      }
-
-      .overlay .h1 {
-        font-size: 6rem;
-        color: #fd552f;
-      }
-
-      .menus {
-        display: flex;
-        flex-direction: column;
-        gap: 1em;
-      }
-
-      .menu-nav {
-        display: flex;
-        gap: 1em;
-        font-size: 3rem;
-        text-transform: uppercase;
-      }
-
-      /* GRID FLASH USING PSEUDO ELEMENT */
-      .overlay::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-
-        background:
-          repeating-linear-gradient(
-            0deg,
-            #fd552f 0 100px,
-            transparent 100px 200px
-          ),
-          repeating-linear-gradient(
-            90deg,
-            #fd552f 0 100px,
-            transparent 100px 200px
-          ),
-          repeating-linear-gradient(
-            0deg,
-            rgba(253, 85, 47, 0.7) 0 100px,
-            transparent 100px 200px
-          ),
-          repeating-linear-gradient(
-            90deg,
-            rgba(253, 85, 47, 0.7) 0 100px,
-            transparent 100px 200px
-          );
-
-        background-size:
-          200px 200px,
-          200px 200px,
-          200px 200px,
-          200px 200px;
-
-        background-position:
-          0 0,
-          0 0,
-          50px 80px,
-          -80px 30px;
-
-        opacity: 0;
-        transform: scale(1.05);
-      }
-
-      /* ACTIVE STATE */
-      body.menu-open .overlay {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-        z-index: 0;
-      }
-
-      /* TRIGGER GRID FLASH FIRST */
-      body.menu-open .overlay::before {
-        animation: gridFlash 0.35s ease-out forwards;
-      }
-
-      @keyframes gridFlash {
-        0% {
-          opacity: 0;
-          background-position:
-            0 0,
-            0 0,
-            50px 80px,
-            -80px 30px;
-        }
-
-        30% {
-          opacity: 1;
-        }
-
-        60% {
-          background-position:
-            40px 60px,
-            -60px 20px,
-            100px 20px,
-            -20px 120px;
-          opacity: 1;
-        }
-
-        100% {
-          opacity: 0;
-        }
+      .box {
+        width: 20px;
+        height: 80px;
+        background: #ccc;
+        transition: background 0.1s;
       }
     </style>
   </head>
   <body>
-    <div class="toggle">
-      <div>&#9776;</div>
-    </div>
+    <div class="container"></div>
+    <!-- 
+    <script>
+      const container = document.querySelector(".container");
 
-    <div class="nav">
-      <p class="logo">Logo</p>
-      <div class="navs">
-        <p>Home</p>
-        <p>About</p>
-        <p>Services</p>
-      </div>
-    </div>
+      // CREATE 300 BOXES (heavy)
+      for (let i = 0; i < 300; i++) {
+        const div = document.createElement("div");
+        div.className = "box";
+        container.appendChild(div);
+      }
 
-    <div class="content">
-      <h1>
-        We <br />
-        Help <br />brands <br />
-        explor <br />
-        vibes
-      </h1>
-    </div>
+      const boxes = document.querySelectorAll(".box");
 
-    <div class="overlay">
-      <div class="h1">Work With us</div>
-      <div class="menus">
-        <div class="menu-nav">
-          <p>(01)</p>
-          <p>Contact</p>
-        </div>
-        <div class="menu-nav">
-          <p>(02)</p>
-          <p>Portfolio</p>
-        </div>
-        <div class="menu-nav">
-          <p>(03)</p>
-          <p>About Us</p>
-        </div>
-        <div class="menu-nav">
-          <p>(04)</p>
-          <p>Services</p>
-        </div>
-      </div>
-    </div>
+      // ❌ VERY BAD: expensive mousemove
+      document.addEventListener("mousemove", () => {
+        boxes.forEach((box) => {
+          // force layout + paint
+          box.style.height = Math.random() * 100 + "px";
+          box.style.background = `rgb(${Math.random() * 255},0,0)`;
+        });
+      });
+    </script> -->
 
     <script>
-      const toggle = document.querySelector(".toggle");
+      const container = document.querySelector(".container");
 
-      toggle.addEventListener("click", () => {
-        document.body.classList.toggle("menu-open");
+      for (let i = 0; i < 300; i++) {
+        const div = document.createElement("div");
+        div.className = "box";
+        container.appendChild(div);
+      }
+
+      const boxes = Array.from(document.querySelectorAll(".box"));
+      let lastIndex = null;
+
+      container.addEventListener("mousemove", (e) => {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const index = Math.floor(x / 22);
+
+        if (index === lastIndex) return;
+
+        if (lastIndex !== null && boxes[lastIndex]) {
+          boxes[lastIndex].style.height = "80px";
+          boxes[lastIndex].style.background = "#ccc";
+        }
+
+        if (boxes[index]) {
+          boxes[index].style.height = "120px";
+          boxes[index].style.background = "red";
+        }
+
+        lastIndex = index;
       });
     </script>
   </body>
