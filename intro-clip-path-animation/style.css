@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Special+Gothic+Condensed+One&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Special Gothic Condensed One", sans-serif;
+}
+
+html,
+body {
+  height: 100svh;
+  width: 100%;
+  overflow: hidden;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 2em;
+}
+
+.logo {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.navs {
+  display: flex;
+  gap: 1.5em;
+}
+.navs p {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.container h1 {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 10rem;
+}
+
+.loader {
+  position: fixed;
+  width: 100%;
+  height: 100svh;
+  clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 0);
+}
