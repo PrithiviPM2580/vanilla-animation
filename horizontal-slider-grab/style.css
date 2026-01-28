@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100svh;
+  font-family: monospace;
+  overflow: hidden;
+}
+
+nav,
+footer {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  padding: 1em 3em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav {
+  top: 0;
+}
+
+footer {
+  bottom: 0;
+}
+
+.slider {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slider-wrapper {
+  width: max-content;
+  padding: 0 150px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}
+
+.slide {
+  width: 500px;
+  height: 500px;
+  background-color: gray;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.marker-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  height: 100svh;
+}
+
+.marker {
+  position: relative;
+  width: 2px;
+  height: 100%;
+  background-color: #000;
+}
+
+.marker::after {
+  position: absolute;
+  content: "";
+  display: block;
+  top: 50px;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 100%;
+}
+
+.active-slide {
+  position: absolute;
+  top: 60px;
+  left: 40px;
+  font-size: 15px;
+}
