@@ -24,35 +24,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
       gsap.to(img, { scale: scale, duration: 1 });
     });
+  }
+
+  setScale();
+
+  window.addEventListener("scroll", setScale);
+
+  let scrollY = 0;
+  let oldScrollY = 0;
+  let roundedScrollY = 0;
+  let lerpAmount = 0.1;
+
+  function lerp(start, end, amt) {
+    return (1 - amt) * start + amt * end;
+  }
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    roundedScrollY = lerp(roundedScrollY, scrollY, lerpAmount);
+
+    document.querySelector(".container").style.transform =
+      `translate3d(0, -${roundedScrollY}px, 0)`;
 
     setScale();
-
-    window.addEventListener("scroll", setScale);
-
-    let scrollY = 0;
-    let oldScrollY = 0;
-    let roundedScrollY = 0;
-    let lerpAmount = 0.1;
-
-    function lerp(start, end, amt) {
-      return (1 - amt) * start + amt * end;
-    }
-
-    function animate() {
-      requestAnimationFrame(animate);
-
-      roundedScrollY = lerp(roundedScrollY, scrollY, lerpAmount);
-
-      document.querySelector(".container").style.transform =
-        `translate3d(0, -${roundedScrollY}px, 0)`;
-
-      setScale();
-    }
-
-    window.addEventListener("scroll", function (e) {
-      scrollY = window.scrollY;
-    });
-
-    animate();
   }
+
+  window.addEventListener("scroll", function (e) {
+    scrollY = window.scrollY;
+  });
+
+  animate();
 });
