@@ -4,58 +4,209 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
     <style>
       * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-      }
-      .container {
-        height: 100svh;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100svh;
+  font-family: monospace;
+  overflow: hidden;
+}
 
-      .img {
-        height: 650px;
-        width: 500px;
-        overflow: hidden;
+nav,
+footer {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  padding: 1em 3em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-        /* START hidden */
-        clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-        transition: clip-path 0.8s ease;
-      }
+nav {
+  top: 0;
+}
 
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
+footer {
+  bottom: 0;
+}
+
+.slider {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slider-wrapper {
+  width: max-content;
+  padding: 0 150px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}
+
+.slide {
+  width: 500px;
+  height: 500px;
+  background-color: gray;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.marker-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  height: 100svh;
+}
+
+.marker {
+  position: relative;
+  width: 2px;
+  height: 100%;
+  background-color: #000;
+}
+
+.marker::after {
+  position: absolute;
+  content: "";
+  display: block;
+  top: 50px;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 100%;
+}
+
+.active-slide {
+  position: absolute;
+  top: 60px;
+  left: 40px;
+  font-size: 15px;
+}
+
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="img">
-        <img src="./images/img1.png" alt="" />
+    <nav>
+      <div class="logo">PPM</div>
+      <div class="menu">Menu</div>
+    </nav>
+    <div class="marker-wrapper">
+      <div class="marker">
+        <div class="grab"></div>
       </div>
+      <div class="active-slide">1/10</div>
     </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const img = document.querySelector(".img");
+    <div class="slider">
+      <div class="slider-wrapper">
+        <div class="slide">
+          <img src="../images/img1.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img2.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img3.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img4.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img5.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img6.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img1.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img2.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img3.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img4.png" alt="" />
+        </div>
+      </div>
+      <footer>
+        <p>Elite web design</p>
+        <p>PPM 2026 &copy;</p>
+      </footer>
 
-        window.addEventListener("click", () => {
-          img.style.clipPath = "polygon(0 0, 100% 0, 100% 100%, 0 100%)";
-        });
-      });
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="./script.js">
+      document.addEventListener("DOMContentLoaded", function () {
+  let target = 0;
+  let current = 0;
+  let ease = 0.075;
+
+  const slider = document.querySelector(".slider");
+  const sliderWrapper = document.querySelector(".slider-wrapper");
+  const markerWrapper = document.querySelector(".marker-wrapper");
+  const activeSlide = document.querySelector(".active-slide");
+
+  let maxScroll = sliderWrapper.offsetWidth - window.innerWidth;
+
+  function lerp(start, end, t) {
+    return start * (1 - t) + end * t;
+  }
+
+  const x = gsap.quickTo(sliderWrapper, "x");
+  const marker = gsap.quickTo(markerWrapper, "x");
+
+  function updateActiveSliderNumber(markerMove, markerMaxMove) {
+    const partWidth = markerMaxMove / 10;
+    let currentPart = Math.round((markerMove - 70) / partWidth) + 1;
+    currentPart = Math.min(10, currentPart);
+    activeSlide.textContent = `${currentPart}/10`;
+  }
+
+  function update() {
+    current = lerp(current, target, ease);
+    x(-current);
+
+    let moveRation = current / maxScroll;
+    let markerMaxMove = window.innerWidth - markerWrapper.offsetWidth - 170;
+    let markerMove = 70 + moveRation * markerMaxMove;
+    marker(markerMove);
+    updateActiveSliderNumber(markerMove, markerMaxMove);
+
+    requestAnimationFrame(update);
+  }
+
+  window.addEventListener("resize", function () {
+    maxScroll = sliderWrapper.offsetWidth - window.innerWidth;
+  });
+
+  window.addEventListener("wheel", (e) => {
+    target += e.deltaY;
+
+    target = Math.max(0, target);
+    target = Math.min(maxScroll, target);
+  });
+
+  update();
+});
+
     </script>
   </body>
 </html>
