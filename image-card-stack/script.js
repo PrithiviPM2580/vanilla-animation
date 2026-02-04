@@ -61,8 +61,55 @@ document.addEventListener("DOMContentLoaded", function () {
   const imgs = document.querySelectorAll(".img");
 
   gsap.set(".img", {
-    top: "70%",
+    top: "45%",
     left: "50%",
-    transform: "translate(-50%, -50%)",
+    transform: "translate(-50%, -50%) scale(0)",
   });
+
+  gsap.from("p", {
+    y: 40,
+    ease: "power4.inOut",
+    duration: 1,
+    stagger: {
+      amount: 0.15,
+    },
+    delay: 0.5,
+  });
+
+  gsap.to(".img", {
+    scale: 1,
+    width: "300px",
+    height: "400px",
+    stagger: 0.15,
+    duration: 0.75,
+    ease: "power3.out",
+    delay: 1,
+    onComplete: scatterAndShrink,
+  });
+
+  gsap.to("p", {
+    top: "40px",
+    ease: "power4.inOut",
+    duration: 1,
+    stagger: {
+      amount: 0.15,
+    },
+    delay: 3,
+    onComplete: () => {
+      document.querySelector(".header").remove();
+    },
+  });
+
+  function scatterAndShrink() {
+    gsap.to(".img", {
+      top: (i) => positions[i].top,
+      left: (i) => positions[i].left,
+      transfrom: "none",
+      width: "75px",
+      height: "100px",
+      stagger: 0.075,
+      duration: 0.75,
+      ease: "power2.out",
+    });
+  }
 });
