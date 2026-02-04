@@ -63,7 +63,7 @@ body {
 
 .gallery {
   width: 100%;
-  height: calc(100vh -60px);
+  height: calc(100vh - 60px);
   position: relative;
 }
 
@@ -72,7 +72,7 @@ body {
   width: 75px;
   height: 100px;
   overflow: hidden;
-  margin: 20px;
+  margin: 0;
 }
 
 .img img {
