@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
           isAnimating = false;
         },
       },
-      "<"
+      "<",
     );
   }
 
@@ -90,11 +90,8 @@ document.addEventListener("DOMContentLoaded", function () {
         clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
         duration: 2,
         ease: "power4.inOut",
-        onComplete: () => {
-          isAnimating = false;
-        },
       },
-      "<"
+      "<",
     );
   }
 

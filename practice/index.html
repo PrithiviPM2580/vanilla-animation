@@ -3,89 +3,65 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Intersection Observer Fade Example</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        padding: 0;
-        margin: 0;
-      }
-
-      h1 {
-        text-align: center;
-        margin: 20px 0;
-      }
-
-      p {
-        text-align: center;
-      }
-
-      .spacer {
-        height: 200px; /* Just to create scrolling space */
-      }
-
-      .fade {
-        background-color: #3498db;
-        color: white;
-        height: 300px;
-        margin: 0 auto;
-        width: 300px;
-        text-align: center;
-        font-size: 1.2rem;
-        border: 1px solid #2980b9;
-
-        /* Start hidden */
-        opacity: 0;
-        transform: translateY(20px);
-
-        /* Transition for smooth animation */
-        transition:
-          opacity 0.6s ease-out,
-          transform 0.6s ease-out;
-      }
-
-      /* Class to add when visible */
-      .fade.show {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    </style>
+    <title>Document</title>
   </head>
   <body>
-    <h1>Intersection Observer Demo</h1>
-
-    <p>Scroll down to see the fade-in elements.</p>
-
-    <div class="spacer"></div>
-
-    <div class="fade">Fade-in Box 1</div>
-    <div class="spacer"></div>
-    <div class="fade">Fade-in Box 2</div>
-    <div class="spacer"></div>
-    <div class="fade">Fade-in Box 3</div>
-    <div class="spacer"></div>
-    <div class="fade">Fade-in Box 4</div>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const fadeElements = document.querySelectorAll(".fade");
-
-        const fadeObserver = new IntersectionObserver(
-          (entries, observer) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("show"); // fade in
-                console.log("Element faded in:", entry.target);
-                console.log("Intersection ratio:", entry.intersectionRatio);
-                observer.unobserve(entry.target); // stop observing
-              }
-            });
-          },
-          { threshold: 0 },
-        );
-
-        fadeElements.forEach((el) => fadeObserver.observe(el));
-      });
-    </script>
+    <div class="header">
+      <p>PPM</p>
+      <p>Menu</p>
+    </div>
+    <div class="footer">
+      <p>Copyright 2024</p>
+      <p>All rights reserved</p>
+    </div>
+    <div class="slider">
+      <div class="slider-wrapper">
+        <div class="slide">
+          <img src="../images/img1.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img2.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img3.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img4.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img5.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img6.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img1.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img2.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img3.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img4.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img5.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img6.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img1.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img2.png" alt="" />
+        </div>
+        <div class="slide">
+          <img src="../images/img3.png" alt="" />
+        </div>
+      </div>
+    </div>
   </body>
 </html>
