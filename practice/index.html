@@ -26,10 +26,11 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%) scale(0);
         width: 70px;
         height: 100px;
         background-color: #ca1d1d;
+        will-change: transform;
       }
       img {
         width: 100%;
@@ -82,8 +83,6 @@
           const initialRotation = (angleOffset * 180) / Math.PI - 90;
           const x = centerX + radius * Math.cos(angleOffset);
           const y = centerY + radius * Math.sin(angleOffset);
-
-          gsap.set(item, { scale: 0 });
 
           gsap.to(
             item,
