@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         nextContent.classList.add("slider-content-active");
         nextContent.style.top = "0";
 
-        currentContentIndex = (currentContentIndex + 1) % sliderContent.length;
+        currentContentIndex = (currentContentIndex + 1) % totalImages;
         const nextContentText = sliderContent[currentContentIndex];
         const newContentHTML = `<div class="slider-content-next" style="top: 200px;"><h1>${nextContentText}</h1></div>`;
         document
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     currentImageIndex = (currentImageIndex % totalImages) + 1;
 
-    const newSldeHTML = `
+    const newSlideHTML = `
     <div class="slide-next">
       <div class="slide-next-img">
         <img src="../images/img${currentImageIndex}.png" alt="Image ${currentImageIndex}">
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document
       .querySelector(".slider")
-      .insertAdjacentHTML("beforeend", newSldeHTML);
+      .insertAdjacentHTML("beforeend", newSlideHTML);
 
     gsap.to(".slider .slide-next:last-child .slide-next-img", {
       clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
       delay: 0.5,
     });
 
-    const slideNextImg = document.querySelector(".slider-next-img");
+    const slideNextImg = document.querySelector(".slide-next-img");
     gsap.to(slideNextImg, {
       width: "100%",
       height: "100svh",
