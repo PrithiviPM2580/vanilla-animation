@@ -104,11 +104,39 @@ document.addEventListener("DOMContentLoaded", () => {
       .querySelector(".slider")
       .insertAdjacentHTML("beforeend", newSldeHTML);
 
-    gsap.to(".slider .slider-next:last-child .slide-next-img", {
+    gsap.to(".slider .slide-next:last-child .slide-next-img", {
       clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
       duration: 1.5,
       ease: "power3.out",
       delay: 0.5,
+    });
+
+    const slideNextImg = document.querySelector(".slider-next-img");
+    gsap.to(slideNextImg, {
+      width: "100%",
+      height: "100svh",
+      duration: 2,
+      ease: "power3.out",
+      onComplete: () => {
+        const currentActiveSlide = document.querySelector(".slide-active");
+        if (currentActiveSlide) {
+          currentActiveSlide.parentNode.removeChild(currentActiveSlide);
+        }
+
+        const nextSlide = document.querySelector(".slide-next");
+        if (nextSlide) {
+          nextSlide.classList.remove("slide-next");
+          nextSlide.classList.add("slide-active");
+
+          const nextSlideImg = nextSlide.querySelector(".slide-next-img");
+          if (nextSlide) {
+            nextSlideImg.classList.remove("slide-next-img");
+          }
+        }
+        setTimeout(() => {
+          isAnimating = false;
+        }, 500);
+      },
     });
   });
 });
