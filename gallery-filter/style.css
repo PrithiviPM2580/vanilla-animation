@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Anton", sans-serif;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.filters {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50vw;
+  height: 100svh;
+  padding: 2em 2em 8em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  /* background-color: red; */
+}
+
+.filter {
+  width: max-content;
+  height: max-content;
+  padding: 0.5em 0;
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+  /* background-color: red; */
+}
+
+.filter p {
+  position: relative;
+  bottom: 10px;
+  padding: 0 0.5em;
+  font-size: 20px;
+}
+
+.filter.active p {
+  bottom: 24px;
+}
+
+.filter h1 span {
+  position: relative;
+  text-transform: uppercase;
+  font-size: 75px;
+  color: #000;
+  line-height: 80%;
+  transition: color 0.3s;
+}
+
+.filter.acctive h1 span {
+  color: #fb5eff;
+}
+
+.items {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  padding: 2em;
+  display: flex;
+}
+
+.items-col {
+  flex: 1;
+  height: max-content;
+  padding: 2em 1em;
+}
+
+.items-col:nth-child(2) {
+  position: relative;
+  top: 10em;
+}
+
+.item {
+  padding: 1em 1em 4em 1em;
+}
+
+.item-img {
+  width: 100%;
+  height: 300px;
+}
+
+.item-copy p {
+  font-size: 15px;
+  margin: 0.5em 0;
+}
