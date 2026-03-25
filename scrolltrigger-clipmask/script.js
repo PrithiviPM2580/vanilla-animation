@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
       currentSection,
       prevPreview,
       "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-      "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+      "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
       "top bottom",
       "center center",
     );
