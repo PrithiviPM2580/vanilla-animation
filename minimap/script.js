@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
   dimensions = updateDimensions();
   maxTranslate = dimensions.containerSize - dimensions.indicatorSize;
 
-  function getItemicator() {
+  function getIndicatorItem() {
     itemImages.forEach((img) => (img.style.opacity = 1));
 
     const indicatorStart = -currentTranslate;
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
         : `translateY(${currentTranslate}px)`;
       items.style.transform = transform;
 
-      const activeIndex = getItemicator();
+      const activeIndex = getIndicatorItem();
       updatePreviewImage(activeIndex);
     } else {
       isClickMove = false;
