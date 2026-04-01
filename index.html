@@ -7,7 +7,6 @@
       rel="stylesheet"
       href="https://unpkg.com/lenis@1.2.3/dist/lenis.css"
     />
-    <!-- <link rel="stylesheet" href="./style.css" /> -->
     <title>Document</title>
     <style>
       * {
@@ -15,253 +14,268 @@
         padding: 0;
         box-sizing: border-box;
       }
-
-      html,
-      body {
-        width: 100%;
-        height: 100%;
-        background-color: #000;
-      }
-
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
+      .wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        background-color: #000;
+      }
+      .minimap {
+        position: sticky;
+        top: 0;
+        width: 25%;
+        height: 100svh;
+        padding-top: 300px;
+        overflow: hidden;
+        background-color: #000;
+        transition: 0.5s background-color;
+      }
+      .indicator {
+        position: absolute;
+        top: 300px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 125px;
+        border: 1.5px solid #fff;
+        border-radius: 4px;
+        mix-blend-mode: difference;
+        z-index: 2;
+      }
+      .minimap-images {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .img {
+        position: relative;
+        width: 100px;
+        height: 125px;
+        padding: 10px;
+        overflow: hidden;
+      }
+      .gallery {
+        position: relative;
+        top: 0;
+        width: 75%;
+      }
+
+      .item {
+        position: relative;
+        width: 500px;
+        height: 600px;
+        overflow: hidden;
+        margin: 50px auto;
+      }
+
+      .item-img {
+        width: 500px;
+        height: 550px;
+      }
+
+      .item-copy {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+        text-transform: uppercase;
+      }
 
       .container {
         width: 100%;
         height: 100%;
+        background-color: #000;
       }
-
-      h1 {
-        color: #fff;
-        font-size: 14vw;
-        font-weight: 400;
-        letter-spacing: -0.025em;
-        text-transform: uppercase;
-        text-align: center;
-      }
-
-      p {
-        color: #fff;
-        font-size: 14px;
-        font-weight: 500;
-        text-transform: uppercase;
-        text-align: center;
-      }
-
-      .intro-copy {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 0;
-      }
-
-      section {
-        margin: 150vh 0;
-      }
-
-      .section-previews {
-        position: fixed;
-        width: 500px;
-        height: 700px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-
-      .img {
-        position: absolute;
+      .hero {
+        height: 100svh;
         width: 100%;
-        height: 100%;
-        clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
-        overflow: hidden;
-      }
-
-      .spacer {
-        width: 100%;
-        height: 200px;
-      }
-
-      @media (max-width: 900px) {
-        .section-previews {
-          width: 300px;
-          height: 500px;
-        }
-
-        h1 {
-          font-size: 18vw;
-        }
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="intro-copy">
-        <p>This message stays right here</p>
-        <p>no matter where you go</p>
-        <p>it won't move an inch</p>
-        <p>even if you scroll up or down</p>
+    <main class="container">
+      <div class="wrapper">
+        <div class="minimap">
+          <div class="indicator"></div>
+          <div class="minimap-images">
+            <div class="minimap-image">
+              <div class="img">
+                <img src="./images/img1.png" alt="" />
+              </div>
+              <div class="item-name">Item 1</div>
+            </div>
+            <div class="minimap-image">
+              <div class="img">
+                <img src="./images/img2.png" alt="" />
+              </div>
+              <div class="item-name">Item 2</div>
+            </div>
+            <div class="minimap-image">
+              <div class="img">
+                <img src="./images/img3.png" alt="" />
+              </div>
+              <div class="item-name">Item 3</div>
+            </div>
+            <div class="minimap-image">
+              <div class="img">
+                <img src="./images/img4.png" alt="" />
+              </div>
+              <div class="item-name">Item 4</div>
+            </div>
+            <div class="minimap-image">
+              <div class="img">
+                <img src="./images/img5.png" alt="" />
+              </div>
+              <div class="item-name">Item 5</div>
+            </div>
+            <div class="minimap-image">
+              <div class="img">
+                <img src="./images/img6.png" alt="" />
+              </div>
+              <div class="item-name">Item 6</div>
+            </div>
+            <div class="minimap-image">
+              <div class="img">
+                <img src="./images/img1.png" alt="" />
+              </div>
+              <div class="item-name">Item 1</div>
+            </div>
+            <div class="minimap-image">
+              <div class="img">
+                <img src="./images/img2.png" alt="" />
+              </div>
+              <div class="item-name">Item 2</div>
+            </div>
+            <div class="minimap-image">
+              <div class="img">
+                <img src="./images/img3.png" alt="" />
+              </div>
+              <div class="item-name">Item 3</div>
+            </div>
+            <div class="minimap-image">
+              <div class="img">
+                <img src="./images/img4.png" alt="" />
+              </div>
+              <div class="item-name">Item 4</div>
+            </div>
+          </div>
+        </div>
+        <div class="gallery">
+          <div class="item">
+            <div class="item-img">
+              <img src="./images/img1.png" alt="" />
+            </div>
+            <div class="item-name">Item 1</div>
+          </div>
+          <div class="item">
+            <div class="item-img">
+              <img src="./images/img2.png" alt="" />
+            </div>
+            <div class="item-name">Item 2</div>
+          </div>
+          <div class="item">
+            <div class="item-img">
+              <img src="./images/img3.png" alt="" />
+            </div>
+            <div class="item-name">Item 3</div>
+          </div>
+          <div class="item">
+            <div class="item-img">
+              <img src="./images/img4.png" alt="" />
+            </div>
+            <div class="item-name">Item 4</div>
+          </div>
+          <div class="item">
+            <div class="item-img">
+              <img src="./images/img5.png" alt="" />
+            </div>
+            <div class="item-name">Item 5</div>
+          </div>
+          <div class="item">
+            <div class="item-img">
+              <img src="./images/img6.png" alt="" />
+            </div>
+            <div class="item-name">Item 6</div>
+          </div>
+          <div class="item">
+            <div class="item-img">
+              <img src="./images/img1.png" alt="" />
+            </div>
+            <div class="item-name">Item 1</div>
+          </div>
+          <div class="item">
+            <div class="item-img">
+              <img src="./images/img2.png" alt="" />
+            </div>
+            <div class="item-name">Item 2</div>
+          </div>
+          <div class="item">
+            <div class="item-img">
+              <img src="./images/img3.png" alt="" />
+            </div>
+            <div class="item-name">Item 3</div>
+          </div>
+          <div class="item">
+            <div class="item-img">
+              <img src="./images/img4.png" alt="" />
+            </div>
+            <div class="item-name">Item 4</div>
+          </div>
+        </div>
       </div>
-      <div class="headers">
-        <section id="section-1">
-          <h1>Vaccum</h1>
-        </section>
-        <section id="section-2">
-          <h1>Ember</h1>
-        </section>
-        <section id="section-3">
-          <h1>Scratch</h1>
-        </section>
-        <section id="section-4">
-          <h1>Azure</h1>
-        </section>
-        <section id="section-5">
-          <h1>Synthesis</h1>
-        </section>
-        <section id="section-6">
-          <h1>Euphoria</h1>
-        </section>
-        <section id="section-7">
-          <h1>Nova</h1>
-        </section>
-        <div class="spacer"></div>
+      <div class="hero">
+        <h1>Hello, World!</h1>
       </div>
-      <div class="section-previews">
-        <div class="img" id="preview-1">
-          <img src="./images/img1.png" alt="" />
-        </div>
-        <div class="img" id="preview-2">
-          <img src="./images/img2.png" alt="" />
-        </div>
-        <div class="img" id="preview-3">
-          <img src="./images/img3.png" alt="" />
-        </div>
-        <div class="img" id="preview-4">
-          <img src="./images/img4.png" alt="" />
-        </div>
-        <div class="img" id="preview-5">
-          <img src="./images/img5.png" alt="" />
-        </div>
-        <div class="img" id="preview-6">
-          <img src="./images/img6.png" alt="" />
-        </div>
-      </div>
-    </div>
+    </main>
 
     <script src="https://unpkg.com/lenis@1.2.3/dist/lenis.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        gsap.registerPlugin(ScrollTrigger);
-
+      document.addEventListener("DOMContentLoaded", () => {
         const lenis = new Lenis();
 
-        lenis.on("scroll", ScrollTrigger.update);
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
 
-        gsap.ticker.add((time) => {
-          lenis.raf(time * 1000);
-        });
-
-        gsap.ticker.lagSmoothing(0);
-
-        // function addImageScaleAnimation() {
-        //   gsap.utils.toArray("section").forEach((section, index) => {
-        //     const image = document.querySelector(`#preview-${index + 1} img`);
-
-        //     const startCondition = index === 0 ? "top top" : "bottom bottom";
-
-        //     gsap.to(image, {
-        //       scrollTrigger: {
-        //         trigger: section,
-        //         start: startCondition,
-        //         markers: true,
-        //         end: () => {
-        //           const viewportHeight = window.innerHeight;
-        //           const sectionBottom =
-        //             section.offsetTop + section.offsetHeight;
-        //           const additionalDistance = viewportHeight * 0.5;
-        //           const endValue =
-        //             sectionBottom - viewportHeight + additionalDistance;
-        //           return `+=${endValue}`;
-        //         },
-        //         scrub: true,
-        //       },
-        //       scale: 1.2,
-        //       ease: "none",
-        //     });
-        //   });
-        // }
-
-        // addImageScaleAnimation();
-
-        function animateClipPath(
-          sectionId,
-          previewId,
-          startClipPath,
-          endClipPath,
-          start = "top center",
-          end = "bottom top",
-        ) {
-          const section = document.querySelector(sectionId);
-          const preview = document.querySelector(previewId);
-
-          ScrollTrigger.create({
-            trigger: section,
-            start: start,
-            end: end,
-            onEnter: () => {
-              gsap.to(preview, {
-                scrollTrigger: {
-                  trigger: section,
-                  start: start,
-                  end: end,
-                  scrub: true,
-                },
-                clipPath: endClipPath,
-                ease: "none",
-              });
-            },
-          });
+        function mapRange(value, inMin, inMax, outMin, outMax) {
+          return (
+            ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin
+          );
         }
 
-        animateClipPath(
-          "#section-1",
-          "#preview-1",
-          "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
-          "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-        );
+        const gallery = document.querySelector(".gallery");
+        const minimap = document.querySelector(".minimap");
+        const minimapImages = document.querySelector(".minimap-images");
 
-        const totalSections = 7;
-
-        for (let i = 2; i <= totalSections; i++) {
-          let currentSection = `#section-${i}`;
-          let prevPreview = `#preview-${i - 1}`;
-          let currentPreview = `#preview-${i}`;
-
-          animateClipPath(
-            currentSection,
-            prevPreview,
-            "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-            "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-            "top bottom",
-            "center center",
+        function handleScroll() {
+          const scrollY = window.scrollY;
+          const translateY = mapRange(
+            scrollY,
+            0,
+            gallery.scrollHeight,
+            0,
+            minimapImages.scrollHeight,
           );
 
-          if (i < totalSections) {
-            animateClipPath(
-              currentSection,
-              currentPreview,
-              "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
-              "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-              "top center",
-              "bottom top",
-            );
-          }
+          minimapImages.style.transform = `translateX(-50%) translateY(${-translateY}px)`;
         }
+
+        window.addEventListener("scroll", handleScroll);
       });
     </script>
   </body>
