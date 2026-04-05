@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
     layerData.forEach((layer) => {
       let z = layer.baseZ + currentScroll;
       z = ((z % tunnelDepth) + tunnelDepth) % tunnelDepth;
-      z = z - tunnelDepth * exitPoint;
+      z = z - tunnelDepth + exitPoint;
 
       const overlay = calculateOverlay(z);
 
