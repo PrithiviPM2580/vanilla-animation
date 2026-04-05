@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --pink: hsl(330, 100%, 55%);
+  --yellow: hsl(52, 100%, 50%);
+  --orange: hsl(20, 100%, 55%);
+  --cyan: hsl(185, 100%, 52%);
+  --cream: hsl(48, 100%, 93%);
+  --dark: hsl(20, 10%, 5%);
+}
+
+body {
+  background: var(--dark);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+.cursor {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  width: 10px;
+  height: 10px;
+  background: var(--yellow);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed;
+  z-index: 9998;
+  pointer-events: none;
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--yellow);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition:
+    width 0.25s,
+    height 0.25s;
+}
